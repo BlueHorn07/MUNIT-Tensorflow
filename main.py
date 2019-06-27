@@ -86,7 +86,10 @@ def main():
       exit()
 
     # open session
-    with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
+    tf_config = tf.ConfigProto()
+    tf_config.gpu_options.allow_growth = True
+    tf_config.allow_soft_placement = True
+    with tf.Session(config=tf_config) as sess:
         gan = MUNIT(sess, args)
 
         # build graph

@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.contrib import slim
-from scipy import misc
+from skimage import io
 import os, random
 import numpy as np
 
@@ -32,8 +32,8 @@ class ImageData:
 
 
 def load_test_data(image_path, size_h=256, size_w=256):
-    img = misc.imread(image_path, mode='RGB')
-    img = misc.imresize(img, [size_h, size_w])
+    img = io.imread(image_path, mode='RGB')
+    img = io.imresize(img, [size_h, size_w])
     img = np.expand_dims(img, axis=0)
     img = preprocessing(img)
 
@@ -58,7 +58,7 @@ def inverse_transform(images):
     return (images+1.) / 2
 
 def imsave(images, size, path):
-    return misc.imsave(path, merge(images, size))
+    return io.imsave(path, merge(images, size))
 
 def merge(images, size):
     h, w = images.shape[1], images.shape[2]
