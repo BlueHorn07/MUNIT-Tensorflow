@@ -3,6 +3,7 @@ from utils import *
 from glob import glob
 import time
 from tensorflow.contrib.data import batch_and_drop_remainder
+import numpy as np
 
 class MUNIT(object) :
     def __init__(self, sess, args):
@@ -477,6 +478,35 @@ class MUNIT(object) :
         else:
             print(" [*] Failed to find a checkpoint")
             return False, 0
+
+    def test_opencv(self, edge):
+        tf.global_variables_initializer().run()
+
+        self.saver = tf.train.Saver()
+        could_load, checkpoint_counter = self.load(self.checkpoint_dir)
+        self.result_dir = os.path.join(self.result_dir, self.model_dir)
+        check_folder(self.result_dir)
+
+        if could_load :
+            print(" [*] Load SUCCESS")
+        else :
+            print(" [!] Load failed...")
+
+        sample_image = edge.copy()
+        sample_image = np.expand_dims(sample_image, axis=0)
+        sample_image = preprocessing(sample_image)
+
+        results = edge.copy()
+
+        for i in range(self.num_style) :
+            test_style = np.random.normal(loc=0.0, scale=1.0, size=[1, 1, 1, self.style_dim])
+
+            fake_img = self.sess.run(self.test_fake_B, feed_dict = {self.test_image : sample_image, self.test_style : test_style})
+            save_images(fake_img, [1, 1], 'samples/test_%d.jpg' % i)
+
+            results = np.concatenate([results, inverse_transform(fake_img).squeeze()], axis=1)
+
+        return results
 
     def test(self):
         tf.global_variables_initializer().run()

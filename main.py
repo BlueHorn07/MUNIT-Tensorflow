@@ -1,6 +1,8 @@
 from MUNIT import MUNIT
 import argparse
 from utils import *
+import cv2
+from Sketcher import Sketcher
 
 """parsing and configuration"""
 def parse_args():
@@ -110,6 +112,27 @@ def main():
         if args.phase == 'guide' :
             gan.style_guide_test()
             print(" [*] Guide finished!")
+
+        if args.phase == 'opencv' :
+            edge = np.zeros((256, 256, 3), dtype=np.uint8)
+            sketcher = Sketcher('image', [edge], lambda : ((255, 255, 255), 255))
+
+            while True:
+                key = cv2.waitKey()
+
+                if key == ord('q'):
+                    exit()
+                if key == ord('r'):
+                    edge[:] = np.zeros((256, 256, 3), dtype=np.uint8)
+                    sketcher.show()
+                if key == 32: # hit spacebar
+                    break
+
+            results = gan.test_opencv(edge)
+            print(" [*] Test finished!")
+
+            cv2.imshow('result', results)
+            cv2.waitKey(0)
 
 if __name__ == '__main__':
     main()
