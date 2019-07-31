@@ -1,3 +1,33 @@
+# edges2portrait
+Edges to portrait image-to-image translation using MUNIT
+
+Inspired from ![Mario Klingemann's work](https://twitter.com/quasimondo/status/826065030944870400)
+
+![edges2portrait](./assests/edges2portrait_result.jpg)
+
+## Pretrained Model
+
+![Download](https://drive.google.com/drive/folders/1GQd0pv1j3oCZelj2k2jIyUKc5Amu9Kik?usp=sharing)
+
+```
+./checkpoint/MUNIT_edges2portrait_lsgan/checkpoint
+./checkpoint/MUNIT_edges2portrait_lsgan/MUNIT.model-1000001.data-00000-of-00001
+./checkpoint/MUNIT_edges2portrait_lsgan/MUNIT.model-1000001.index
+./checkpoint/MUNIT_edges2portrait_lsgan/MUNIT.model-1000001.meta
+```
+
+## Realtime Sketch to Portrait
+```
+python main.py --phase opencv --dataset edges2portrait --batch_size 1 --num_style 3
+```
+
+## Dataset
+
+Grabbed from https://www.flickr.com/search/?text=portrait%20%20bldigital
+
+![Download preprocessed dataset](https://www.kaggle.com/kairess/edges2portrait/)
+
+
 # MUNIT-Tensorflow
 Simple Tensorflow implementation of ["Multimodal Unsupervised Image-to-Image Translation"](https://arxiv.org/abs/1804.04732)
 
