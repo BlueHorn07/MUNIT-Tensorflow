@@ -1,13 +1,13 @@
 # edges2portrait
 Edges to portrait image-to-image translation using MUNIT
 
-Inspired from ![Mario Klingemann's work](https://twitter.com/quasimondo/status/826065030944870400)
+Inspired from [Mario Klingemann's work](https://twitter.com/quasimondo/status/826065030944870400)
 
 ![edges2portrait](./assests/edges2portrait_result.jpg)
 
 ## Pretrained Model
 
-![Download](https://drive.google.com/drive/folders/1GQd0pv1j3oCZelj2k2jIyUKc5Amu9Kik?usp=sharing)
+[Download](https://drive.google.com/drive/folders/1GQd0pv1j3oCZelj2k2jIyUKc5Amu9Kik?usp=sharing)
 
 ```
 ./checkpoint/MUNIT_edges2portrait_lsgan/checkpoint
@@ -25,7 +25,7 @@ python main.py --phase opencv --dataset edges2portrait --batch_size 1 --num_styl
 
 Grabbed from https://www.flickr.com/search/?text=portrait%20%20bldigital
 
-![Download preprocessed dataset](https://www.kaggle.com/kairess/edges2portrait/)
+[Download preprocessed dataset](https://www.kaggle.com/kairess/edges2portrait/)
 
 
 # MUNIT-Tensorflow
